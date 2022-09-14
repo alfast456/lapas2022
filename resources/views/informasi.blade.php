@@ -93,7 +93,7 @@
                                     </a>
                                 </div>
                                 <div class="form-group bg-white rounded">
-                                    <a class="form-control" href="{{ url('dasar-uu') }}">
+                                    <a class="form-control" href="{{ route('dasar-uu') }}">
                                         Dasar Undang-Undang
                                         <img src="{{ asset('logo/panah-removebg-preview.png')}}" alt="" height="24" class="d-inline-block align-text-top float-right">
                                     </a>

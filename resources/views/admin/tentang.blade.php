@@ -19,24 +19,46 @@
 <body class="">
     <ul class="nav fixed-top justify-content-center bg-primary">
         <li class="nav-item">
-            <a class="nav-link h4 text-white" href="#">INFORMASI</a>
+            <a class="nav-link h4 text-white" href="#">Tentang Visi Misi</a>
         </li>
     </ul>
     <div class="container" style="margin-top: 4rem">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="/informasi" class="btn btn-primary">Kembali</a>
-                <h5 class="mt-3">Dasar Undang-Undang</h5>
-                <table class="table table-bordered mt-3">
-                    <tbody>
-                        @foreach ($dasaruu as $item)
-                        <tr>
-                            <td colspan="2">{{ $item->deskripsi }}</td>
-                            <td><a href="{{ asset("dasaruu/".$item->file) }}"><img src="{{ asset('logo/unduh-depositphotos-bgremover.png')}}" alt="" height="35" class="d-inline-block align-text-top float-right"></a></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <a href="{{ url('/admin-view') }}" class="btn btn-primary">Kembali</a>
+                @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+                @endif
+                {{-- <div class="card mt-3"> --}}
+                    <div class="table-responsive mt-3">
+                        <table  class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Deskripsi</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($tentang as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{!! $item->deskripsi!!}</td>
+                                <td>
+                                    <a href="{{ route('edittentang',$item->id) }}" class="btn btn-warning">Edit</a>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="text-center">Tidak ada data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

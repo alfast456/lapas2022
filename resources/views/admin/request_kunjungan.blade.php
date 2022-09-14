@@ -31,13 +31,16 @@
                     {{ session('status') }}
                 </div>
                 @endif
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <table  class="text-center">
+                {{-- <div class="card mt-3"> --}}
+                    <div class="table-responsive mt-3">
+                        <table  class="table table-hover text-center">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">NIK</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Tanggal Kunjungan</th>
+                                <th scope="col">Jam Kunjungan</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -45,7 +48,10 @@
                             @forelse ($kunjungan as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
+                                <td>{{ $item->nik }}</td>
                                 <td><h6>{{ $item->nama}}</h6></td>
+                                <td>{{ $item->jadwal_kunjungan }}</td>
+                                <td>{{ $item->jam_kunjungan }}</td>
                                 <td>@if ($item->status == 0)
                                     <a class="badge badge-danger text-white" href="{{ route('konfimasi',$item->id) }}">Belum Dikonfirmasi</a>
                                     @elseif($item->status == 1)
@@ -62,7 +68,7 @@
                         </tbody>
                     </table>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

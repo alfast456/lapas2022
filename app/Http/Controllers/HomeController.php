@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\tentang;
+use App\Models\dasaruu;
 
 class HomeController extends Controller
 {
@@ -29,5 +31,17 @@ class HomeController extends Controller
     public function kunjungan()
     {
         return view('kunjungan');
+    }
+
+    public function visi()
+    {
+        $visi = tentang::all();
+        return view('informasi1', compact('visi'));
+    }
+
+    public function dasaruu()
+    {
+        $dasaruu = dasaruu::all();
+        return view('informasi2', compact('dasaruu'));
     }
 }

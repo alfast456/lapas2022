@@ -98,6 +98,15 @@
                     <div class="card-body">
                         <a href="{{ route('riwayatkunjungan') }}" class="btn btn-primary d-flex justify-content-center h6">Riwayat Kunjungan</a>
                     </div>
+                    <div class="card-body">
+                        <a href="{{ route('panduan') }}" class="btn btn-primary d-flex justify-content-center h6">Panduan</a>
+                    </div>
+                    <div class="card-body">
+                        <a href="{{ route('tentang') }}" class="btn btn-primary d-flex justify-content-center h6">Visi Misi</a>
+                    </div>
+                    <div class="card-body">
+                        <a href="{{ route('dasaruu') }}" class="btn btn-primary d-flex justify-content-center h6">Dasar UU</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,39 +19,44 @@
 <body class="">
     <ul class="nav fixed-top justify-content-center bg-primary">
         <li class="nav-item">
-            <a class="nav-link h4 text-white" href="#">Data User</a>
+            <a class="nav-link h4 text-white" href="#">Dasar UU</a>
         </li>
     </ul>
     <div class="container" style="margin-top: 4rem">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <a href="{{ url('/admin-view') }}" class="btn btn-primary">Kembali</a>
-                {{-- <div class="card col-md-12 mt-3"> --}}
-                    <div class="table-responsive">
-                        <table  class="table table-striped text-center mt-3">
+                <a href="{{ route('createdasaruu') }}" class="btn btn-primary">Tambah data</a>
+                @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+                @endif
+                {{-- <div class="card mt-3"> --}}
+                    <div class="table-responsive mt-3">
+                        <table  class="table table-hover text-center">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">No. HP</th>
-                                <th scope="col">JK</th>
-                                <th scope="col">TTL</th>
+                                <th scope="col">Deskripsi</th>
+                                <th scope="col">file</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $item)
+                            @forelse ($dasaruu as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td><h6>{{ $item->nama}}</h6></td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->no_hp }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
-                                <td>{{ $item->tempat_lahir }}, {{ $item->tgl_lahir }}</td>
+                                <td>{{ $item->deskripsi}}</td>
+                                <td>{{ $item->file }}</td>
+                                <td>
+                                    {{-- <a href="{{ route('editdasaruu',$item->id) }}" class="btn btn-warning">Edit</a> --}}
+                                    <form action="{{ route('deletedasaruu',$item->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                             @empty
                             <tr>

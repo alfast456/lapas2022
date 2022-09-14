@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\kunjunganController;
+use App\Http\Controllers\simpanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +46,13 @@ Route::get('/informasi', function () {
     return view('informasi');
 });
 
-Route::get('/visi', function () {
-    return view('informasi1');
-});
+// Route::get('/visi', function () {
+//     return view('informasi1');
+// });
 
-Route::get('/dasar-uu', function () {
-    return view('informasi2');
-});
+// Route::get('/dasar-uu', function () {
+//     return view('informasi2');
+// });
 
 // Route::get('/kunjungan', function () {
 //     return view('kunjungan');
@@ -82,6 +83,8 @@ Route::get('/lokasi', function () {
 });
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/visi', [HomeController::class, 'visi'])->name('visi')->middleware('auth');
+Route::get('/dasar-uu', [HomeController::class, 'dasaruu'])->name('dasar-uu')->middleware('auth');
 Route::get('/kunjungan', [HomeController::class, 'kunjungan'])->name('kunjungan')->middleware('auth');
 Route::get('/riwayat_kunjungan', [kunjunganController::class, 'index'])->name('riwayat')->middleware('auth');
 Route::get('/form-kunjungan', [kunjunganController::class, 'create'])->name('form-kunjungan')->middleware('auth');
@@ -91,11 +94,25 @@ Route::get('/edit-profil/{id}', [UserController::class, 'edit'])->name('edit-pro
 Route::put('/update-profil/{id}', [UserController::class, 'update'])->name('edit-profil-update')->middleware('auth');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Route::get('admin-view', [HomeController::class, 'admin'])->name('admin');
     Route::get('admin-view/user', [UserController::class, 'index'])->name('datauser');
     Route::get('admin-view', [adminController::class, 'index'])->name('admin');
     Route::get('admin-view/kunjungan', [adminController::class, 'kunjungan'])->name('requestkunjungan');
     Route::get('admin-view/riwayat-kunjungan', [adminController::class, 'riwayat'])->name('riwayatkunjungan');
     Route::get('admin-view/riwayat-kunjungan/{id}', [adminController::class, 'showriwayat'])->name('konfimasi');
     Route::put('admin-view/riwayat-kunjungan/{id}', [adminController::class, 'updateriwayat'])->name('updateriwayat');
+    Route::get('admin-view/panduan', [adminController::class, 'panduan'])->name('panduan');
+    Route::get('admin-view/panduan/create', [adminController::class, 'createpanduan'])->name('createpanduan');
+    Route::post('admin-view/panduan/create', [adminController::class, 'storepanduan'])->name('storepanduan');
+    Route::get('admin-view/panduan/{id}', [adminController::class, 'showpanduan'])->name('editpanduan');
+    Route::put('admin-view/panduan/{id}', [adminController::class, 'updatepanduan'])->name('updatepanduan');
+    Route::delete('admin-view/panduan/{id}', [adminController::class, 'destroypanduan'])->name('destroypanduan');
+    Route::get('admin-view/tentang', [adminController::class, 'tentang'])->name('tentang');
+    Route::get('admin-view/tentang/{id}', [adminController::class, 'showtentang'])->name('edittentang');
+    Route::put('admin-view/tentang/{id}', [adminController::class, 'updatetentang'])->name('updatetentang');
+    Route::get('admin-view/dasaruu', [simpanController::class, 'dasaruu'])->name('dasaruu');
+    Route::get('admin-view/dasaruu/{id}', [simpanController::class, 'showdasaruu'])->name('editdasaruu');
+    Route::put('admin-view/dasaruu/{id}', [simpanController::class, 'updatedasaruu'])->name('updatedasaruu');
+    Route::get('admin-view/buatdasaruu/', [simpanController::class, 'createdasaruu'])->name('createdasaruu');
+    Route::post('admin-view/buatdasaruu/', [simpanController::class, 'storedasaruu'])->name('storedasaruu');
+    Route::delete('admin-view/dasaruu/{id}', [simpanController::class, 'deletedasaruu'])->name('deletedasaruu');
 });

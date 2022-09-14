@@ -28,12 +28,9 @@
                 <a href="/informasi" class="btn btn-primary">Kembali</a>
                 <div class="card mt-3">
                     <div class="card-body">
-                        <p class="">
-                            ljkshdflakjf aaoihjdf
-                            ajklfh af ak aklf jlkasf
-                            aklf kla sfka flaflaj f alfajahfdkjs ahkja lakh sdjakhd
-                                 alka klsakl akl
-                        </p>
+                       @foreach ($visi as $item)
+                           {!! $item->deskripsi !!}
+                       @endforeach
                     </div>
                 </div>
             </div>

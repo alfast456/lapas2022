@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Models\kunjungan;
 use Illuminate\Http\Request;
+use App\Models\panduan;
+use App\Models\tentang;
+use App\Models\dasaruu;
 
 class adminController extends Controller
 {
@@ -120,7 +123,103 @@ class adminController extends Controller
         }
     }
 
+    public function panduan()
+    {
+        $panduan = panduan::all();
+        return view('admin.panduan', compact('panduan'));
+    }
 
+    public function showpanduan($id)
+    {
+        $where = array('id' => $id);
+        $panduan = panduan::findOrFail($where);
+        return view('admin.edit_panduan', compact('panduan'));
+    }
+
+    public function updatepanduan(Request $request, $id)
+    {
+        $this->validate($request, [
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        $where = array('id' => $id);
+        $panduan = panduan::where($where)->first();
+        $panduan->judul = $request->judul;
+        $panduan->deskripsi = $request->deskripsi;
+        // dd($panduan);
+        $panduan->update();
+        // dd($kunjungan);
+        if ($panduan) {
+            return redirect()->route('panduan')->with('status', 'Data Berhasil Diupdate');
+        } else {
+            return redirect()->route('panduan')->with('status', 'Data Gagal Diupdate');
+        }
+    }
+
+    public function createpanduan()
+    {
+        return view('admin.createpanduan');
+    }
+
+    public function storepanduan(Request $request)
+    {
+        $this->validate($request, [
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        $panduan = panduan::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+        ]);
+        if ($panduan) {
+            return redirect()->route('panduan')->with('status', 'Data Berhasil Ditambahkan');
+        } else {
+            return redirect()->route('panduan')->with('status', 'Data Gagal Ditambahkan');
+        }
+    }
+
+    public function deletepanduan($id)
+    {
+        $where = array('id' => $id);
+        $panduan = panduan::where($where)->first();
+        $panduan->delete();
+        if ($panduan) {
+            return redirect()->route('panduan')->with('status', 'Data Berhasil Dihapus');
+        } else {
+            return redirect()->route('panduan')->with('status', 'Data Gagal Dihapus');
+        }
+    }
+
+    public function tentang()
+    {
+        $tentang = tentang::all();
+        return view('admin.tentang', compact('tentang'));
+    }
+
+    public function showtentang($id)
+    {
+        $where = array('id' => $id);
+        $tentang = tentang::findOrFail($where);
+        return view('admin.edit_tentang', compact('tentang'));
+    }
+
+    public function updatetentang(Request $request, $id)
+    {
+        $this->validate($request, [
+            'deskripsi' => 'required',
+        ]);
+        $where = array('id' => $id);
+        $tentang = tentang::where($where)->first();
+        $tentang->deskripsi = $request->deskripsi;
+        // dd($panduan);
+        $tentang->update();
+        // dd($kunjungan);
+        if ($tentang) {
+            return redirect()->route('tentang')->with('status', 'Data Berhasil Diupdate');
+        } else {
+            return redirect()->route('tentang')->with('status', 'Data Gagal Diupdate');
+        }
+    }
 
 }
 
