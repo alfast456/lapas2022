@@ -32,7 +32,7 @@
                         @foreach ($dasaruu as $item)
                         <tr>
                             <td colspan="2">{{ $item->deskripsi }}</td>
-                            <td><a href="{{ asset("dasaruu/".$item->file) }}"><img src="{{ asset('logo/unduh-depositphotos-bgremover.png')}}" alt="" height="35" class="d-inline-block align-text-top float-right"></a></td>
+                            <td><a href="{{ route('download', $item->id) }}"><img src="{{ asset('logo/unduh-depositphotos-bgremover.png')}}" alt="" height="35" class="d-inline-block align-text-top float-right"></a></td>
                         </tr>
                         @endforeach
                     </tbody>

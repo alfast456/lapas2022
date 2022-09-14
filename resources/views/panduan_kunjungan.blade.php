@@ -28,12 +28,12 @@
                 <a href="/panduan" class="btn btn-primary">Kembali</a>
                 <div class="card mt-3">
                     <div class="card-body">
-                        <p class="">
-                            ljkshdflakjf aaoihjdf
-                            ajklfh af ak aklf jlkasf
-                            aklf kla sfka flaflaj f alfajahfdkjs ahkja lakh sdjakhd
-                                 alka klsakl akl
-                        </p>
+                        @foreach ($panduan as $item)
+                        @if ($item->id == 2)
+                        <p class="card-text">{!! $item->deskripsi !!}</p>
+                        @endif
+
+                        @endforeach
                     </div>
                 </div>
             </div>

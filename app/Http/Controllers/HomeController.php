@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\tentang;
 use App\Models\dasaruu;
+use App\Models\panduan;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class HomeController extends Controller
 {
@@ -43,5 +46,24 @@ class HomeController extends Controller
     {
         $dasaruu = dasaruu::all();
         return view('informasi2', compact('dasaruu'));
+    }
+
+    public function download($id)
+    {
+        $file = dasaruu::find($id);
+        $path = public_path('dasaruu/'.$file->file);
+        return response()->download($path);
+    }
+
+    public function aplikasi()
+    {
+        $panduan = panduan::all();
+        return view('panduan_aplikasi', compact('panduan'));
+    }
+
+    public function panduan()
+    {
+        $panduan = panduan::all();
+        return view('panduan_kunjungan', compact('panduan'));
     }
 }
